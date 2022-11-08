@@ -11,5 +11,7 @@ public class Main {
         //小数
         System.out.println(1.93);
         System.out.println(-3.71);
+
+        //分数
     }
 }
