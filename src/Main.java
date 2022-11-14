@@ -1,35 +1,57 @@
-import java.util.Scanner;
-
 public class Main {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int n = 5;
-		int i, j, temp, min = 0;
-		int[] array;
-		array = new int[n];
-		for (i = 0; i < n; i++) {
-			array[i] = sc.nextInt();
-		}
-		System.out.println("The sequence before sorted:");
-		for (i = 0; i < n - 1; i++) {
-			min = i;
-			for (j = i + 1; j < n; j++) {
-				if (array[min] > array[i]) {
-					min = j;
-				}
-				if (min != i) {
-					temp = array[min];
-					array[min] = array[i];
-					array[i] = temp;
-				}
-			}
-			System.out.println("The sequence after sorted:");
-			for (i = 0; i < n; i++) {
-				System.out.print(array[i]);
-			}
-		}
+		print666();
+		print666();
+	}
+	public static void print666(){
+		System.out.println("666");
 	}
 }
+
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		int[] arr = {1,2,3,4,5};
+//		System.out.println(arr);
+//	}
+//}
+
+
+//import java.util.Scanner;
+//
+//public class Main {
+//	public static void main(String[] args) {
+//		Scanner sc = new Scanner(System.in);
+//		int n = 5;
+//		int i, j, temp, min = 0;
+//		int[] array;
+//		array = new int[n];
+//		for (i = 0; i < n; i++) {
+//			array[i] = sc.nextInt();
+//		}
+//		System.out.println("The sequence before sorted:");
+//		for (i = 0; i < n - 1; i++) {
+//			min = i;
+//			for (j = i + 1; j < n; j++) {
+//				if (array[min] > array[i]) {
+//					min = j;
+//				}
+//				if (min != i) {
+//					temp = array[min];
+//					array[min] = array[i];
+//					array[i] = temp;
+//				}
+//			}
+//			System.out.println("The sequence after sorted:");
+//			for (i = 0; i < n; i++) {
+//				System.out.print(array[i]);
+//			}
+//		}
+//	}
+//}
+
+
 ////TripPlan
 //import java.util.Scanner;
 //
