@@ -1,13 +1,139 @@
 public class Main {
 	public static void main(String[] args) {
-		print666();
-		print666();
+		method(
+				new Animal() {
+					@Override
+					public void eat() {
+						System.out.println("狗吃骨头");
+					}
+				}
+		);
 	}
-	public static void print666(){
-		System.out.println("666");
+
+	public static void method(Animal a) {
+		a.eat();
 	}
 }
 
+
+//public class Main {
+//	public static void main(String[] args) {
+//		Person p = new Student();
+////		System.out.println(p.name);
+//		Student q = (Student) p;
+//		q.sout();
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		show(new Cat()); // 以 Cat 对象调用 show 方法
+//		show(new Dog()); // 以 Dog 对象调用 show 方法
+//		Animal a = new Cat(); // 向上转型
+//		a.eat(); // 调用的是 Cat 的 eat
+//		Cat c = (Cat) a; // 向下转型
+//		c.work(); // 调用的是 Cat 的 work
+//	}
+//
+//	public static void show(Animal a) {
+//		a.eat();
+//// 类型判断
+//		if (a instanceof Cat) { // 猫做的事情
+//			Cat c = (Cat) a;
+//			c.work();
+//		} else if (a instanceof Dog) { // 狗做的事情
+//			Dog c = (Dog) a;
+//			c.work();
+//		}
+//	}
+//}
+//
+//abstract class Animal {
+//	abstract void eat();
+//}
+//
+//class Cat extends Animal {
+//	public void eat() {
+//		System.out.println("吃鱼");
+//	}
+//
+//	public void work() {
+//		System.out.println("抓老鼠");
+//	}
+//}
+//
+//class Dog extends Animal {
+//	public void eat() {
+//		System.out.println("吃骨头");
+//	}
+//
+//	public void work() {
+//		System.out.println("看家");
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		GirlFriend gf1 = new GirlFriend();
+//		gf1.setAge(16);
+//		System.out.println(gf1.getAge());
+//		Scanner sc = new Scanner(System.in);
+//		String name = sc.next();
+//		String sex = sc.next();
+//		Person p = new Person();
+//		Person q = new Person(name,sex);
+
+
+//		WuMingFen f1 = new WuMingFen("牛肉",3,true);
+//		WuMingFen f2 = new WuMingFen("牛肉",3);
+//		WuMingFen f3 = new WuMingFen();
+//		f1.check();
+//		f2.check();
+//		f3.check();
+
+
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		eat();
+//	}
+//	public  static  void sleep(){
+//		System.out.println("睡觉");
+//	}
+//	public  static  void study(){
+//		System.out.println("学习");
+//	}
+//	public  static  void  eat(){
+//		study();
+//		System.out.println("吃饭");
+//		sleep();
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		print666();
+//		print666();
+//	}
+//
+//	public static void print666() {
+//		System.out.println("666");
+//	}
+//
+//	public static void compare(int a, int b) {
+//		System.out.println(a == b);
+//	}
+//
+//	public static void compare(double a, double b) {
+//		System.out.println(a == b);
+//	}
+//}
 
 
 //public class Main {
