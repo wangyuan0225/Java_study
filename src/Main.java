@@ -1,19 +1,256 @@
-public class Main {
-	public static void main(String[] args) {
-		method(
-				new Animal() {
-					@Override
-					public void eat() {
-						System.out.println("狗吃骨头");
-					}
-				}
-		);
-	}
-
-	public static void method(Animal a) {
-		a.eat();
+import java.util.*;
+import java.text.*;
+public class DateDemo {
+	public static void main(String args[]) {
+		Date dNow = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+		System.out.println("Current Date: " + ft.format(dNow));
 	}
 }
+
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		String s1 = "hello";
+//		String s2 = "Hello";
+//
+//		//charAt(int index)方法->返回指定索引处的 char值。即找出特定位置的字符，注意索引从0开始
+//		System.out.println(s1.charAt(0));//h
+//		System.out.println(s1.charAt(4));//o
+//		//System.out.println(s1.charAt(5));//越界，编译错误
+//
+//		//compareTo(String anotherString)方法->按字典顺序比较两个字符串。返回 anotherString - 待比较的 String 。
+//		System.out.println(s1.compareTo(s2));//s2 - s1 = 32 > 0,故s2 > s1
+//		//compareToIgnoreCase(String str)方法->按字典顺序比较两个字符串，忽略大小写差异
+//		System.out.println(s1.compareToIgnoreCase(s2));//0
+//
+//		//concat(String str)方法->将指定的字符串连接到此字符串的末尾。但是无法对s1本身操作，还不如用+连接呢
+//		System.out.println(s1.concat("!!"));//hello!!
+//
+//		//contains(CharSequence s)方法->当且仅当此字符串包含指定的char值序列时，才返回true。
+//		//注意到contains()方法的参数是CharSequence而不是String，因为CharSequence是String实现的一个接口。
+//		//CharSequence是char值的可读序列。该接口提供对许多不同类型的char序列的统一，只读访问。
+//		System.out.println(s1.contains("he"));//ture
+//		System.out.println(s1.contains("helo"));//false
+//
+//		//equals(Object anObject)方法->将此字符串与指定的对象进行比较。
+//		System.out.println(s1.equals(s2));//false
+//		//equalsIgnoreCase(String anotherString)方法->将此 String与另一个 String比较，忽略了大小写。
+//		System.out.println(s1.equalsIgnoreCase(s2));//true
+//
+//		//format(String format, Object... args)方法->使用指定的格式字符串和参数返回格式化字符串。
+//		System.out.println(String.format("Hi %s, your score is %.2f!", "Bob", 59.5));//Hi Bob, your score is 59.50!
+//		//formatted(Object... args)方法->Formats using this string as the format string, and the supplied arguments.使用此字符串作为格式字符串的格式，以及提供的参数。
+//		String s = "Hi %s, your score is %d!";
+//		System.out.println(s.formatted("Alice", 80));//Hi Alice, your score is 80!
+//		//有几个占位符，后面就传入几个参数。参数类型要和占位符一致。我们经常用这个方法来格式化信息。常用的占位符有：
+//		//%s：显示字符串；
+//		//%d：显示整数；
+//		//%x：显示十六进制整数；
+//		//%f：显示浮点数。
+//		//占位符还可以带格式，例如%.2f表示显示两位小数。如果你不确定用啥占位符，那就始终用%s，因为%s可以显示任何数据类型。
+//
+//		//indexOf(int ch)方法->返回指定字符第一次出现的字符串中的索引。
+//		System.out.println(s1.indexOf('h'));//0
+//		System.out.println(s1.indexOf('l'));//2
+//		System.out.println(s1.indexOf('a'));//-1
+//		//indexOf(int ch, int fromIndex)方法->返回指定字符第一次出现的此字符串中的索引，从指定索引处开始搜索。
+//		System.out.println(s1.indexOf('l', 3));//3
+//		System.out.println(s1.indexOf('h', 3));//-1
+//		//indexOf(String str)方法->返回指定子字符串第一次出现的字符串中的索引。
+//		System.out.println(s1.indexOf("el"));//1
+//		System.out.println(s1.indexOf("eo"));//-1
+//		//indexOf(String str, int fromIndex)方法->从指定的索引处开始，返回指定子字符串第一次出现的字符串中的索引。
+//		System.out.println(s1.indexOf("ll", 2));//2
+//		System.out.println(s1.indexOf("ll", 3));//-1
+//
+//		//isBlank()方法->如果字符串为空或仅包含 white space代码点，则返回 true ，否则 false 。
+//		System.out.println(s1.isBlank());//false
+//		//isEmpty()方法->返回 true，当且仅当，length()是 0 。
+//		System.out.println(s1.isEmpty());//false
+//
+//		//join(CharSequence delimiter, CharSequence... elements)方法->返回由 CharSequence elements的副本组成的新String，该副本与指定的 delimiter的副本连接在一起。
+//		System.out.println(String.join("!!", s1, s2, s1, s2));//hello!!Hello!!hello!!Hello
+//		String[] arr = {"h", "e", "l", "l", "o"};
+//		System.out.println(String.join("!", arr));//h!e!l!l!o
+//
+//		//lastIndexOf(int ch)方法->返回指定字符最后一次出现的字符串中的索引。
+//		//lastIndexOf(int ch, int fromIndex)方法->返回指定字符最后一次出现的字符串中的索引，从指定的索引开始向后搜索。
+//		//lastIndexOf(String str)方法->返回指定子字符串最后一次出现的字符串中的索引。
+//		//lastIndexOf(String str, int fromIndex)方法->返回指定子字符串最后一次出现的字符串中的索引，从指定索引开始向后搜索。
+//
+//		//length()方法->返回此字符串的长度。
+//		System.out.println(s1.length());//5
+//
+//		//repeat(int count)方法->返回一个字符串，其值为此字符串的串联重复 count次。
+//		System.out.println(s1.repeat(3));//hellohellohello
+//
+//		//replace(char oldChar, char newChar)方法->返回从替换所有出现的导致一个字符串 oldChar在此字符串 newChar 。
+//		System.out.println(s1.replace('l', 'L'));//heLLo
+//		//replace(CharSequence target, CharSequence replacement)方法->将此字符串中与文字目标序列匹配的每个子字符串替换为指定的文字替换序列。
+//		System.out.println(s1.replace("hel", "HEL"));//HELlo
+//		//replaceAll(String regex, String replacement)方法->将给定替换的给定 regular expression匹配的此字符串的每个子字符串替换。
+//		String s4 = "A,,B;C ,D";
+//		System.out.println(s4.replaceAll("[,;\\s]+", ",")); // A,B,C,D
+//
+//		//split(String regex)方法->将此字符串拆分为给定 regular expression的匹配 项 。
+//		String s5 = "A,B,C,D";
+//		String[] ss1 = s5.split(",");
+//		System.out.println(ss1[1]);//B
+//
+//		//startsWith(String prefix, int toffset)方法->测试从指定索引开始的此字符串的子字符串是否以指定的前缀开头。
+//		System.out.println(s1.startsWith("he"));//true
+//
+//		//strip()方法->返回一个字符串，其值为此字符串，并删除了所有前导和尾随空白字符，空白字符包括任何空格（包括\u3000），\t，\r，\n。
+//		System.out.println("  \u3000\tHello\r\n ".strip());//Hello
+//		//stripLeading()方法->返回一个字符串，其值为此字符串，并删除了所有前导 white space 。
+//		System.out.println("  \tHello\r\n ".stripLeading());//Hello<CR><CR>
+//		//stripTrailing()方法->返回一个字符串，其值为此字符串，并删除所有尾随 white space 。
+//		System.out.println("  \tHello\r\n ".stripTrailing());//  	Hello
+//
+//		//substring(int beginIndex)方法->返回一个字符串，该字符串是此字符串的子字符串。
+//		System.out.println(s1.substring(1));//ello
+//		//substring(int beginIndex, int endIndex)方法->返回一个字符串，该字符串是此字符串的子字符串。
+//		System.out.println(s1.substring(1, 3));//el,左闭右开[a,b)
+//
+//		//toCharArray()方法->将此字符串转换为新的字符数组。
+//		char[] ss2 = s1.toCharArray();
+//		System.out.println(ss2[2]);//l
+//
+//		//toLowerCase()方法->使用默认语言环境的规则将此 String所有字符转换为小写。
+//		System.out.println(s2.toLowerCase());//hello
+//		//toUpperCase()方法->使用默认语言环境的规则将此 String所有字符转换为大写。
+//		System.out.println(s1.toUpperCase());//HELLO
+//
+//		//trim()方法->返回一个字符串，其值为此字符串，删除了所有前导和尾随空格，其中space被定义为其代码点小于或等于 'U+0020' （空格字符）的任何字符。
+//		System.out.println("\u3000Hello\u3000".trim()); // "　Hello　",3000>2000,无法删除
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		char[] a = new char[62];
+//		int i = 0;
+//		for (char j = 'A'; j <= 'Z'; i++, j++) {
+//			a[i] = j;
+//		}
+//		for(int j = 0;j<i;j++)
+//		System.out.println(a[j]);
+//	}
+//}
+
+
+//import java.util.Random;
+//
+//public class Main {
+//	public static void main(String[] args) {
+//		Random random = new Random();
+//		System.out.println("nextInt()：" + random.nextInt()); // 随机生成一个整数，这个整数的范围就是int类型的范围-2^31~2^31-1
+//		System.out.println("nextLong()：" + random.nextLong()); // 随机生成long类型范围的整数
+//		System.out.println("nextFloat()：" + random.nextFloat()); // 随机生成[0, 1.0)区间的小数
+//		System.out.println("nextDouble()：" + random.nextDouble()); // 随机生成[0, 1.0)区间的小数
+//		System.out.println("nextBoolean()：" + random.nextBoolean());//随机生成一个boolean值，生成true和false的值几率相等，也就是都是50%的几率
+//		System.out.println("nextGaussian():" + random.nextGaussian());//随机生成呈高斯（“正态”）分布的 double 值，其平均值是 0.0，标准差是 1.0
+//		byte[] byteArr = new byte[5];
+//		random.nextBytes(byteArr); // 随机生成byte，并存放在定义的数组中，生成的个数等于定义的数组的个数
+//		System.out.print("nextBytes()：");
+//		for (int i = 0; i < byteArr.length; i++) {
+//			System.out.print(byteArr[i] + "\t");
+//		}
+//		System.out.println();
+//		/**
+//		 * random.nextInt(n)
+//		 * 随机生成一个正整数，整数范围[0,n),包含0而不包含n
+//		 * 如果想生成其他范围的数据，可以在此基础上进行加减
+//		 * 例如：
+//		 * 1. 想生成范围在[0,n]的整数
+//		 *         random.nextInt(n+1)
+//		 * 2. 想生成范围在[m,n]的整数, n > m
+//		 *         random.nextInt(n-m+1) + m
+//		 *         random.nextInt() % (n-m) + m
+//		 * 3. 想生成范围在(m,n)的整数
+//		 *         random.nextInt(n-m+1) + m -1
+//		 *         random.nextInt() % (n-m) + m - 1
+//		 * ......主要是依靠简单的加减法
+//		 */
+//		System.out.println("nextInt(10)：" + random.nextInt(10)); // 随机生成一个整数，整数范围[0,10)
+//		for (int i = 0; i < 5; i++) {
+//			System.out.println("我生成了一个[3,15)区间的数，它是：" + (random.nextInt(12) + 3));
+//		}
+//		/**
+//		 * random.nextDouble()
+//		 * 例如:
+//		 * 1.生成[0,1.0)区间的小数
+//		 *         double d1 = random.nextDouble();//直接使用nextDouble方法获得。
+//		 * 2.生成[0,5.0)区间的小数
+//		 *           double d2 = random.nextDouble() * 5;//因为扩大5倍即是要求的区间。同理，生成[0,d)区间的随机小数，d为任意正的小数，则只需要将nextDouble方法的返回值乘以d即可。
+//		 * 3.生成[1,2.5)区间的小数
+//		 *         double d3 = r.nextDouble() * 1.5 + 1;//生成[1,2.5)区间的随机小数，则只需要首先生成[0,1.5)区间的随机数字，然后将生成的随机数区间加1即可。
+//		 * ......同理，生成任意非从0开始的小数区间[d1,d2)范围的随机数字(其中d1不等于0)，则只需要首先生成[0,d2-d1)区间的随机数字，然后将生成的随机数字区间加上d1即可。
+//		 *
+//		 */
+//	}
+//}
+
+
+//import java.util.Random;
+//public class Main {
+//	public void random() {
+//		int i = 0;
+//		int j = 0;
+//		Random random = new Random(1);
+//		Random random1 = new Random(1);
+//		i = random.nextInt();
+//		j = random1.nextInt();
+//		System.out.println("i:" + i + "\nj:" + j);
+//	}
+//	public static void main(String[] args) {
+//		Main tt = new Main();
+//		tt.random();
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		Scanner sc = new Scanner(System.in);
+//		String str = sc.next();
+//		// String substring(int start,int end)
+//		// 截取字符串，传入的两个参数分别为要截取边界的下标
+//		// 在java api 中,通常使用两个数字表示范围时,都是含头不含尾,即包含起始下标对应的内容,但不包含结束下标的处对应的内容
+//		// String toUpperCase() 将当前字符串中的英文部分转换为全大写
+//		/********* Begin *********/
+//		int x1=str.indexOf(".")+1;
+//		int x2=str.indexOf(".",x1);
+//		//x2的意思为从指定索引处开始，返回第一次出现的指定字符串中的索引
+//		//通俗意思是先从指定处x1开始查找，直到查到该指定字符串，然后返回该字符串的索引
+//		String a=str.substring(x1,x2);
+//		System.out.println(a);
+//		String b=a.toUpperCase();
+//		System.out.println(b);
+//		/********* End *********/
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		method(
+//				new Animal() {
+//					@Override
+//					public void eat() {
+//						System.out.println("狗吃骨头");
+//					}
+//				}
+//		);
+//	}
+//
+//	public static void method(Animal a) {
+//		a.eat();
+//	}
+//}
 
 
 //public class Main {
