@@ -1,13 +1,154 @@
-import java.util.*;
-import java.text.*;
-public class DateDemo {
-	public static void main(String args[]) {
-		Date dNow = new Date();
-		SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-		System.out.println("Current Date: " + ft.format(dNow));
+public class Main {
+	public static void main(String[] args) {
+		Weekday day = Weekday.SUN;
+		if (day.dayValue == 6 || day.dayValue == 0) {
+			System.out.println("Today is " + day + ". Work at home!");
+		} else {
+			System.out.println("Today is " + day + ". Work at office!");
+		}
 	}
 }
 
+enum Weekday {
+	MON(1, "星期一"), TUE(2, "星期二"), WED(3, "星期三"), THU(4, "星期四"), FRI(5, "星期五"), SAT(6, "星期六"), SUN(0, "星期日");
+
+	public final int dayValue;
+	private final String chinese;
+
+	private Weekday(int dayValue, String chinese) {
+		this.dayValue = dayValue;
+		this.chinese = chinese;
+	}
+
+	@Override
+	public String toString() {
+		return this.chinese;
+	}
+}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		String[] names = {"Bob", "Alice", "Grace"};
+//		var sb = new StringBuilder();
+//		sb.append("Hello ");
+//		for (String name : names) {
+//			sb.append(name).append(", ");
+//		}
+//		// 注意去掉最后的", ":
+//		sb.delete(sb.length() - 2, sb.length());
+//		sb.append("!");
+//		System.out.println(sb.toString());
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		Adder adder = new Adder();
+//		adder.add(3)
+//				.add(5)
+//				.inc()
+//				.add(10);
+//		System.out.println(adder.value());
+//	}
+//}
+//
+//class Adder {
+//	private int sum = 0;
+//
+//	public Adder add(int n) {
+//		sum += n;
+//		return this;
+//	}
+//
+//	public Adder inc() {
+//		sum++;
+//		return this;
+//	}
+//
+//	public int value() {
+//		return sum;
+//	}
+//
+//}
+
+//public class Main {
+//	public static void main(String args[]) {
+//
+//		/**
+//		 *Math.sqrt()//计算平方根
+//		 *Math.cbrt()//计算立方根
+//		 *Math.pow(a, b)//计算a的b次方
+//		 *Math.max( , );//计算最大值
+//		 *Math.min( , );//计算最小值
+//		 */
+//		System.out.println(Math.sqrt(16));  //4.0
+//		System.out.println(Math.cbrt(8));  //2.0
+//		System.out.println(Math.pow(3, 2));   //9.0
+//		System.out.println(Math.max(2.3, 4.5));//4.5
+//		System.out.println(Math.min(2.3, 4.5));//2.3
+//
+//		/**
+//		 * abs求绝对值
+//		 */
+//		System.out.println(Math.abs(-10.4));  //10.4
+//		System.out.println(Math.abs(10.1));   //10.1
+//
+//		/**
+//		 * ceil天花板的意思，就是返回大的值
+//		 */
+//		System.out.println(Math.ceil(-10.1));  //-10.0
+//		System.out.println(Math.ceil(10.7));  //11.0
+//		System.out.println(Math.ceil(-0.7));  //-0.0
+//		System.out.println(Math.ceil(0.0));   //0.0
+//		System.out.println(Math.ceil(-0.0));  //-0.0
+//		System.out.println(Math.ceil(-1.7));  //-1.0
+//
+//		/**
+//		 * floor地板的意思，就是返回小的值
+//		 */
+//		System.out.println(Math.floor(-10.1)); //-11.0
+//		System.out.println(Math.floor(10.7));  //10.0
+//		System.out.println(Math.floor(-0.7));  //-1.0
+//		System.out.println(Math.floor(0.0));  //0.0
+//		System.out.println(Math.floor(-0.0));  //-0.0
+//
+//		/**
+//		 * random 取得一个大于或者等于0.0小于不等于1.0的随机数
+//		 */
+//		System.out.println(Math.random()); //小于1大于0的double类型的数
+//		System.out.println(Math.random() * 2);//大于0小于1的double类型的数
+//		System.out.println(Math.random() * 2 + 1);//大于1小于2的double类型的数
+//
+//		/**
+//		 * rint 四舍五入，返回double值
+//		 * 注意.5的时候会取偶数
+//		 */
+//		System.out.println(Math.rint(10.1));  //10.0
+//		System.out.println(Math.rint(10.7));  //11.0
+//		System.out.println(Math.rint(11.5));  //12.0
+//		System.out.println(Math.rint(10.5));  //10.0
+//		System.out.println(Math.rint(10.51));  //11.0
+//		System.out.println(Math.rint(-10.5));  //-10.0
+//		System.out.println(Math.rint(-11.5));  //-12.0
+//		System.out.println(Math.rint(-10.51)); //-11.0
+//		System.out.println(Math.rint(-10.6));  //-11.0
+//		System.out.println(Math.rint(-10.2));  //-10.0
+//
+//		/**
+//		 * round 四舍五入，float时返回int值，double时返回long值
+//		 */
+//		System.out.println(Math.round(10.1));  //10
+//		System.out.println(Math.round(10.7));  //11
+//		System.out.println(Math.round(10.5));  //11
+//		System.out.println(Math.round(10.51)); //11
+//		System.out.println(Math.round(-10.5)); //-10
+//		System.out.println(Math.round(-10.51)); //-11
+//		System.out.println(Math.round(-10.6)); //-11
+//		System.out.println(Math.round(-10.2)); //-10
+//	}
+//}
 
 
 //public class Main {
