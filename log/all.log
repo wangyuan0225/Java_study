@@ -1,0 +1,32 @@
+12-21 16:08:25.857 [main] INFO  Main
+start...
+
+12-21 16:08:25.859 [main] WARN  Main
+end.
+
+12-21 16:09:49.468 [main] INFO  Main
+Start process...
+
+12-21 16:09:49.474 [main] ERROR Main
+Invalid encoding.
+
+java.io.UnsupportedEncodingException: invalidCharsetName
+	at java.lang.String.lookupCharset(String.java:841) ~[?:?]
+	at java.lang.String.getBytes(String.java:1770) ~[?:?]
+	at Main.main(Main.java:18) ~[Java_study/:?]
+12-21 16:09:49.497 [main] INFO  Main
+Process end.
+
+12-21 16:25:27.578 [main] INFO  Main
+Start process...
+
+12-21 16:25:27.583 [main] ERROR Main
+Invalid encoding.
+
+java.io.UnsupportedEncodingException: invalidCharsetName
+	at java.lang.String.lookupCharset(String.java:841) ~[?:?]
+	at java.lang.String.getBytes(String.java:1770) ~[?:?]
+	at Main.main(Main.java:18) ~[Java_study/:?]
+12-21 16:25:27.626 [main] INFO  Main
+Process end.
+

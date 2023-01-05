@@ -1,30 +1,562 @@
+
+
+
 public class Main {
-	public static void main(String[] args) {
-		Weekday day = Weekday.SUN;
-		if (day.dayValue == 6 || day.dayValue == 0) {
-			System.out.println("Today is " + day + ". Work at home!");
-		} else {
-			System.out.println("Today is " + day + ". Work at office!");
-		}
+	public static void main(String[] args) throws ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
 	}
 }
 
-enum Weekday {
-	MON(1, "星期一"), TUE(2, "星期二"), WED(3, "星期三"), THU(4, "星期四"), FRI(5, "星期五"), SAT(6, "星期六"), SUN(0, "星期日");
 
-	public final int dayValue;
-	private final String chinese;
+//import java.io.ByteArrayOutputStream;
+//import java.io.IOException;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//		byte[] data;
+//		try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+//			output.write("Hello ".getBytes("UTF-8"));
+//			output.write("world!".getBytes("UTF-8"));
+//			data = "Hello ".getBytes("UTF-8");
+//		}
+//		System.out.println(new String(data, "UTF-8"));
+//	}
+//}
 
-	private Weekday(int dayValue, String chinese) {
-		this.dayValue = dayValue;
-		this.chinese = chinese;
-	}
 
-	@Override
-	public String toString() {
-		return this.chinese;
-	}
-}
+//import java.io.FileWriter;
+//import java.io.IOException;
+//import java.io.PrintWriter;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//
+//		//PrintWriter printWriter = new PrintWriter(System.out);
+//		PrintWriter printWriter = new PrintWriter(new FileWriter("C:\\Users\\王子\\Desktop\\新建 文本文档.txt"));
+//		printWriter.print("hello");
+//		//注意要关闭
+//		printWriter.close();
+//	}
+//}
+
+
+
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//import java.io.PrintStream;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//
+//		PrintStream out = System.out;
+//		//默认打印到显示器
+//		out.println("hello");
+//		out.write("hello".getBytes());
+//		out.close();
+//
+//		//修改打印路径，打印到文件中，且为覆盖模式
+//		//System.setOut(new PrintStream("C:\\Users\\王子\\Desktop\\新建 文本文档.txt"));
+//		//修改打印路径，为续写模式
+//		System.setOut(new PrintStream(new FileOutputStream("C:\\Users\\王子\\Desktop\\新建 文本文档.txt",true)));
+//
+//		System.out.println("hello,世界");
+//	}
+//}
+
+
+//import java.io.*;
+//
+//public class Main{
+//	public static void main(String[] args) throws IOException {
+//
+//		String filePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(filePath), "gbk");
+//		osw.write("hello,你好世界");
+//		osw.close();
+//
+//	}
+//}
+
+
+//import java.io.BufferedReader;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//
+//		String filePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		BufferedReader br = new BufferedReader(new InputStreamReader(
+//													new FileInputStream(filePath), "gbk"));
+//		//读取
+//		String s = br.readLine();
+//		System.out.println(s);
+//		//关流，也是关闭外层流
+//		br.close();
+//
+//	}
+//}
+
+
+//import java.io.BufferedInputStream;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//		String filePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(filePath));
+//		byte[] buff = new byte[1024];
+//		int n;
+//		while ((n = bis.read(buff)) != -1) {
+//			System.out.println(new String(buff, 0, n));
+//		}
+//		bis.close();
+//	}
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		//System类的public final static InputStream in = null;
+//		//System.in 编译类型		InputStream
+//		//System.in 运行类型		BufferedInputStream
+//		//表示的时标准输入 键盘
+//		System.out.println(System.in.getClass());
+//
+//		//System.out public final static PrintStream out = null;
+//		//编译类型 PrintStream
+//		//运行类型 PrintStream
+//		//表示标准输出 显示器
+//		System.out.println(System.out.getClass());
+//	}
+//}
+
+
+//import java.io.*;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException, ClassNotFoundException {
+//		String filePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
+//
+//		System.out.println(ois.readInt());
+//		System.out.println(ois.readBoolean());
+//		System.out.println(ois.readChar());
+//		System.out.println(ois.readDouble());
+//		System.out.println(ois.readUTF());
+//		Object dog = ois.readObject();
+//		System.out.println("运行类型=" + dog.getClass());
+//		System.out.println("Dog信息=" + dog);
+//		//注意这里无法调用dog的getName方法，需要向下转型才可以。
+//		//写法1
+//		Dog dog1 = (Dog) dog;
+//		System.out.println(dog1.getName());
+//		//写法2
+//		System.out.println(((Dog) dog).getName());
+//		ois.close();
+//	}
+//}
+
+
+//import java.io.*;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//		String filePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
+//		//序列化数据到文件
+//		oos.writeInt(100);//int -> Integer(实现了Serializable)
+//		oos.writeBoolean(true);
+//		oos.writeChar('a');
+//		oos.writeDouble(9.5);
+//		oos.writeUTF("Hello, world!");
+//		oos.writeObject(new Dog("旺财", 10));
+//
+//		oos.close();
+//		System.out.println("数据保存完毕");
+//	}
+//}
+
+//class Dog implements Serializable {//注意需要Serializable接口
+//	private static String name;
+//	private transient int age;
+//
+//	@Serial
+//	private static final long serialVersionUID = 1L;
+//
+//	public Dog() {
+//	}
+//
+//	public Dog(String name, int age) {
+//		this.name = name;
+//		this.age = age;
+//	}
+//
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//
+//	public int getAge() {
+//		return age;
+//	}
+//
+//	public void setAge(int age) {
+//		this.age = age;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Dog{" +
+//				"name='" + name + '\'' +
+//				", age=" + age +
+//				'}';
+//	}
+//}
+
+
+//import java.io.*;
+//
+//public class Main {
+//	public static void main(String[] args) {
+//
+////		String srcFile = "C:\\Users\\王子\\Desktop\\新文件1.exe";
+////		String destFile = "C:\\Users\\王子\\Desktop\\新文件2.exe";
+//		String srcFile = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		String destFile = "C:\\Users\\王子\\Desktop\\新建 文本文档-副本.txt";
+//		BufferedInputStream bis = null;
+//		BufferedOutputStream bos = null;
+//
+//		try {
+//			bis = new BufferedInputStream(new FileInputStream(srcFile));
+//			bos = new BufferedOutputStream(new FileOutputStream(destFile));
+//
+//			byte[] buff = new byte[1024];
+//			int readLen = 0;
+//
+//			while ((readLen = bis.read(buff)) != -1) {
+//				bos.write(buff, 0, readLen);
+//			}
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (bis != null) {
+//				try {
+//					bis.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (bos != null) {
+//				try {
+//					bos.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
+//}
+
+
+//import java.io.*;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//		//写文件
+//		try (OutputStream output = new FileOutputStream("C:\\Users\\王子\\Desktop\\新建 文本文档.txt", true)) {
+//			output.write("Hello你好".getBytes()); // Hello
+//		}
+//		//复制文件
+//		try (InputStream input = new FileInputStream("C:\\Users\\王子\\Desktop\\新建 文本文档.txt");
+//			 OutputStream output = new FileOutputStream("C:\\Users\\王子\\Desktop\\新建 文本文档-副本.txt")) {
+//			byte[] buf = new byte[1024];
+//			while ((input.read(buf) != -1)) {
+//				output.write(buf);
+//			}
+//		}
+//	}
+//}
+
+
+//import java.io.*;
+//
+//public class Main {
+//	public static void main(String[] args) {
+//		String srcFilePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		String destFilePath = "C:\\Users\\王子\\Desktop\\新建 文本文档-副本.txt";
+//		BufferedReader bufferedReader = null;
+//		BufferedWriter bufferedWriter = null;
+//		String line;
+//		try {
+//			bufferedReader = new BufferedReader(new FileReader(srcFilePath));
+//			bufferedWriter = new BufferedWriter(new FileWriter(destFilePath));
+//			while ((line = bufferedReader.readLine()) != null){
+//				bufferedWriter.write(line);
+//    			bufferedWriter.newLine();
+//			}
+//			System.out.println("拷贝完毕");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (bufferedReader != null) {
+//				try {
+//					bufferedReader.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			if (bufferedWriter != null) {
+//				try {
+//					bufferedWriter.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
+//}
+
+
+//import java.io.BufferedWriter;
+//import java.io.FileWriter;
+//import java.io.IOException;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//		String filePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		//追加，没有true表示以覆盖方式写入，注意true要加在FileWriter的后面而不是BufferedWriter的后面。
+//		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath, true));
+//		bufferedWriter.write("hello,world");
+//		bufferedWriter.newLine();//插入换行
+//		bufferedWriter.write("hello,world");
+//		bufferedWriter.write("hello,world");
+//		bufferedWriter.close();
+//	}
+//}
+
+
+//import java.io.BufferedReader;
+//import java.io.FileReader;
+//import java.io.IOException;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//		String filePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+//		String line;
+//		while ((line = bufferedReader.readLine()) != null) {
+//			System.out.println(line);
+//		}
+//		bufferedReader.close();
+//	}
+//}
+
+
+//import java.io.*;
+//
+//public class Main {
+//	public static void main(String[] args) {
+//		String filePath = "C:\\Users\\王子\\Desktop\\新建 文本文档.txt";
+//		Writer writer = null;
+//		try {
+//			writer = new FileWriter(filePath);
+//			char[] chars = {'e', 'l'};
+//			writer.write('H');
+//			writer.write(chars);
+//			writer.write("lo!".toCharArray(), 0, 2);
+//			writer.write(",wor");
+//			writer.write("ld!", 0, 3);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				writer.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+//}
+
+
+//import java.io.ByteArrayInputStream;
+//import java.io.IOException;
+//import java.io.InputStream;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//		byte[] data = { 72, 101, 108, 108, 111, 33 };
+//		try (InputStream input = new ByteArrayInputStream(data)) {
+//			String s = readAsString(input);
+//			System.out.println(s);
+//		}
+//	}
+//
+//	public static String readAsString(InputStream input) throws IOException {
+//		int n;
+//		StringBuilder sb = new StringBuilder();
+//		while ((n = input.read()) != -1) {
+//			sb.append((char) n);
+//		}
+//		return sb.toString();
+//	}
+//}
+
+
+//import java.io.File;
+//import java.io.IOException;
+//
+//public class Main {
+//	public static void main(String[] args) throws IOException {
+//		File f2 = new File("C:\\Users\\王子\\Desktop\\新建 文本文档.txt");
+//		f2.delete();
+//		f2.createNewFile();
+//	}
+//}
+
+
+//import java.util.HashMap;
+//import java.util.Map;
+//import java.util.Scanner;
+//
+//public class Main {
+//
+//	private static Scanner input;
+//
+//	public static void main(String[] args) {
+//		input = new Scanner(System.in);//创建键盘输入扫描
+//		Map<String,Long> map = new HashMap<>();//创建一个map用来存储输入的用户名和其对应的电话
+//
+//		while(true){
+//			menu();
+//			System.out.print("请输入选择:");
+//			int choice = input.nextInt();
+//			switch (choice) {
+//				case 1:input(map);break;//添加用户信息
+//				case 2:show(map);break;//查看所有用户信息
+//				case 3:select(map);break;//查询某个用户信息
+//				case 4:
+//					delete(map);break;//删除某个用户
+//				case 5:System.out.println("已退出！！！");return;
+//				default:
+//					System.out.println("输入选项不存在！！！请重新输入！！！");
+//					break;
+//			}
+//
+//		}
+//	}
+//
+//	private static void delete(Map<String, Long> map) {
+//		// TODO Auto-generated method stub
+//		System.out.print("请输入用户名:");
+//		String key = input.next();//需要查看信息的用户名
+//
+//		if(map.containsKey(key)){
+//			System.out.print("是否删除名为" + key + "的用户信息(y/n):");
+//			while(true){
+//				String isDelete = input.next();
+//				if(isDelete.equalsIgnoreCase("y")){
+//					map.remove(key);
+//					System.out.println("删除成功!!!");
+//					break;
+//				}else if(isDelete.contentEquals("n")){
+//					System.out.println("删除失败!!!");
+//					break;
+//				}else{
+//					System.out.println("输入错误,请重新输入!!!");
+//				}
+//			}
+//		}else{
+//			System.out.println("不存在此用户名!!!");
+//		}
+//
+//	}
+//
+//	private static void select(Map<String, Long> map) {
+//		// TODO Auto-generated method stub
+//		System.out.print("请输入用户名:");
+//		String key = input.next();//需要查看信息的用户名
+//
+//		if(map.containsKey(key)){
+//			System.out.println(key + "的用户信息如下:");
+//			System.out.println("用户名:\t" + key);
+//			System.out.println("电话:\t" + map.get(key));
+//		}else{
+//			System.out.println("不存在此用户名!!!");
+//		}
+//	}
+//
+//	private static void show(Map<String, Long> map) {
+//		// TODO Auto-generated method stub
+//		System.out.println("用户名\t电话");
+//		for (Map.Entry<String,Long> entry : map.entrySet()) {
+//			System.out.println(entry.getKey() + "\t" + entry.getValue());
+//		}
+//	}
+//
+//	private static void input(Map<String, Long> map) {
+//		while(true){
+//			//输入用户名
+//			System.out.print("请输入用户名:");
+//			String userName = input.next();
+//			//输入电话
+//			System.out.print("请输入" + userName + "的电话:");
+//			Long number = input.nextLong();
+//
+//			//插入用户名信息
+//			map.put(userName, number);
+//
+//			System.out.print("按任意键继续,是否继续(y/n):");
+//			String isInput = input.next();
+//			if(isInput.equalsIgnoreCase("n")) break;
+//		}
+//
+//	}
+//
+//	private static void menu() {
+//		// TODO Auto-generated method stub
+//		System.out.println("*************************************");
+//		System.out.println("1.录入用户信息\n2.查看所有用户信息\n3.查询用户信息\n4.删除用户\n5.退出");
+//		System.out.println("*************************************");
+//	}
+//
+//}
+
+
+//public class Main {
+//	public static void main(String[] args) {
+//		Weekday day = Weekday.SUN;
+//		if (day.dayValue == 6 || day.dayValue == 0) {
+//			System.out.println("Today is " + day + ". Work at home!");
+//		} else {
+//			System.out.println("Today is " + day + ". Work at office!");
+//		}
+//	}
+//}
+//
+//enum Weekday {
+//	MON(1, "星期一"), TUE(2, "星期二"), WED(3, "星期三"), THU(4, "星期四"), FRI(5, "星期五"), SAT(6, "星期六"), SUN(0, "星期日");
+//
+//	public final int dayValue;
+//	private final String chinese;
+//
+//	private Weekday(int dayValue, String chinese) {
+//		this.dayValue = dayValue;
+//		this.chinese = chinese;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return this.chinese;
+//	}
+//}
 
 
 //public class Main {
