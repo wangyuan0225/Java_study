@@ -1,11 +1,300 @@
+import org.junit.Test;
 
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class Main {
-	public static void main(String[] args) throws ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
+
+	@Test
+	public void testBatchInsert() throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test?rewriteBatchedStatements=true", "root", "123456");
+		String sql = "insert into t_user(account, password, nickname) values (?, ?, ?)";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		for (int i = 0; i < 10000; i++) {
+			statement.setObject(1, "ddd" + i);
+			statement.setObject(2, "ddd" + i);
+			statement.setObject(3, "驴蛋蛋" + i);
+			statement.addBatch();
+		}
+		statement.executeBatch();
+		statement.close();
+		connection.close();
 	}
+
 }
+
+
+//import org.junit.Test;
+//
+//import java.sql.*;
+//
+//public class Main {
+//
+//	@Test
+//	public void returnPrimaryKey(){
+//
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test","root","123456");
+//			String sql = "insert into t_user(account, password, nickname) values(?, ?, ?)";
+//			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS );
+//			statement.setObject(1, "test1");
+//			statement.setObject(2, "123456");
+//			statement.setObject(3,"驴蛋蛋");
+//			int i = statement.executeUpdate();
+//			if(i > 0){
+//				System.out.println("数据插入成功！");
+//
+//				ResultSet resultSet = statement.getGeneratedKeys();
+//				resultSet.next();
+//				int id = resultSet.getInt(1);
+//				System.out.println("id = " + id);
+//
+//			} else {
+//				System.out.println("插入数据失败！");
+//			}
+//			statement.close();
+//			connection.close();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//}
+
+
+//import org.junit.Test;
+//
+//import java.sql.*;
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//
+//public class Main {
+//
+//
+//	@Test
+//	public void testInsert() {
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test", "root", "123456");
+//			String sql = "insert into t_user (account, password, nickname) values(?, ?, ?)";
+//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//			preparedStatement.setObject(1, "test");
+//			preparedStatement.setObject(2, "test");
+//			preparedStatement.setObject(3, "二狗子");
+//
+//			int rows = preparedStatement.executeUpdate();
+//			if (rows > 0) {
+//				System.out.println("数据插入成功!");
+//			} else {
+//				System.out.println("数据插入失败!");
+//			}
+//			preparedStatement.close();
+//			connection.close();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	@Test
+//	public void testUpdate() {
+//
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test", "root", "123456");
+//			String sql = "update t_user set nickname = ? where id = ?";
+//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//			preparedStatement.setObject(1, "三狗子");
+//			preparedStatement.setObject(2, 3);
+//
+//			int i = preparedStatement.executeUpdate();
+//			if (i > 0) {
+//				System.out.println("修改成功");
+//			} else {
+//				System.out.println("修改失败");
+//			}
+//			preparedStatement.close();
+//			connection.close();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	@Test
+//	public void testDelete() {
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test", "root", "123");
+//			String sql = "delete from t_user where id = ?";
+//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//			preparedStatement.setObject(1, 3);
+//
+//			int i = preparedStatement.executeUpdate();
+//			if (i > 0) {
+//				System.out.println("success");
+//			} else {
+//				System.out.println("fail");
+//			}
+//			preparedStatement.close();
+//			connection.close();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	@Test
+//	public void testSelect() {
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test", "root", "123456");
+//			String sql = "select id, account, password, nickname from t_user;";
+//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//			ResultSet resultSet = preparedStatement.executeQuery();
+//
+//
+//			List<Map> list = new ArrayList<>();
+//			//获取列信息
+//			ResultSetMetaData metaData = resultSet.getMetaData();
+//			int columnCount = metaData.getColumnCount();
+//
+//			while (resultSet.next()) {
+//				Map<String, Object> map = new HashMap<>();
+////				map.put("id", resultSet.getObject("id"));
+////				map.put("account", resultSet.getObject("account"));
+////				map.put("password", resultSet.getObject("password"));
+////				map.put("nickname", resultSet.getObject("nickname"));
+//
+//				//注意从1开始
+//				for (int i = 1; i <= columnCount; i++) {
+//					Object value = resultSet.getObject(i);
+//					//获取列名
+//					String columnLabel = metaData.getColumnLabel(i);
+//					map.put(columnLabel, value);
+//				}
+//				list.add(map);
+//			}
+//			System.out.println("List: " + list);
+//			resultSet.close();
+//			preparedStatement.close();
+//			connection.close();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+//}
+
+
+//import java.sql.*;
+//import java.util.Scanner;
+//
+//public class Main {
+//	public static void main(String[] args) {
+//
+//		//1.获取用户输入信息
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("请输入账号:");
+//		String account = sc.nextLine();
+//		System.out.println("请输入密码:");
+//		String password = sc.nextLine();
+//
+//		//2.注册驱动
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test", "root", "123456");
+//			Statement statement = connection.createStatement();
+//			String sql = "select * from t_user where account = ? and password = ?;";
+//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//			preparedStatement.setObject(1, account);
+//			preparedStatement.setObject(2, password);
+//			ResultSet resultSet = preparedStatement.executeQuery();
+//			if (resultSet.next()) {
+//				int id = resultSet.getInt(1);
+//				String account1 = resultSet.getString("account");
+//				String password1 = resultSet.getString("password");
+//				String nickname = resultSet.getString(4);
+//				System.out.println("nickname = " + nickname);
+//				System.out.println("输入正确!");
+//			} else {
+//				System.out.println("输入错误!");
+//			}
+//			resultSet.close();
+//			statement.close();
+//			connection.close();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//}
+
+
+//import java.sql.*;
+//import java.util.Scanner;
+//
+//public class Main {
+//	public static void main(String[] args) {
+//
+//		//1.获取用户输入信息
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("请输入账号:");
+//		String account = sc.nextLine();
+//		System.out.println("请输入密码:");
+//		String password = sc.nextLine();
+//
+//		//2.注册驱动
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test", "root", "123456");
+//			Statement statement = connection.createStatement();
+//			String sql = "select * from t_user where account = '" + account + "' and password = '" + password + "';";
+//			//int i = statement.executeUpdate(sql);
+//			ResultSet resultSet = statement.executeQuery(sql);
+//			if (resultSet.next()) {
+//				int id = resultSet.getInt(1);
+//				String account1 = resultSet.getString("account");
+//				String password1 = resultSet.getString("password");
+//				String nickname = resultSet.getString(4);
+//				System.out.println("nickname = " + nickname);
+//				System.out.println("输入正确!");
+//			} else {
+//				System.out.println("输入错误!");
+//			}
+//			resultSet.close();
+//			statement.close();
+//			connection.close();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//}
+
+
+//import java.sql.*;
+//
+//public class Main {
+//	public static void main(String[] args) {
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/study", "root", "123456");
+//			Statement statement = connection.createStatement();
+//			String sql = "select * from dept;";
+//			ResultSet resultSet = statement.executeQuery(sql);
+//			while (resultSet.next()) {
+//				int id = resultSet.getInt("id");
+//				String name = resultSet.getString("name");
+//				System.out.println(id + "--" + name);
+//			}
+//			resultSet.close();
+//			statement.close();
+//			connection.close();
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//}
 
 
 //import java.io.ByteArrayOutputStream;
@@ -38,7 +327,6 @@ public class Main {
 //		printWriter.close();
 //	}
 //}
-
 
 
 //import java.io.FileOutputStream;
