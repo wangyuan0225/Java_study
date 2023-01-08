@@ -1,3 +1,5 @@
+package others;
+
 public class Teacher {
 	private String name;
 

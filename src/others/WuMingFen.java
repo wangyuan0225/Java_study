@@ -1,3 +1,5 @@
+package others;
+
 public class WuMingFen {
 	String theMa;
 	int quantity;

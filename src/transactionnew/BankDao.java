@@ -1,4 +1,6 @@
-package JDBC_transaction;
+package transactionnew;
+
+import utils.JdbcUtilsV2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,8 +24,10 @@ public class BankDao {
 	 * @param: money 加钱的金额
 	 * @param: connection 连接
 	 **/
-	public void add(String account, int money, Connection connection) {
-		try {
+	public void add(String account, int money) throws SQLException {
+
+			Connection connection = JdbcUtilsV2.getConnection();
+
 			String sql = "update t_bank set money = money + ? where account = ?;";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setObject(1, money);
@@ -31,9 +35,6 @@ public class BankDao {
 			statement.executeUpdate();
 			statement.close();
 			System.out.println("加钱成功！");
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	/**
@@ -44,8 +45,10 @@ public class BankDao {
 	 * @param: money 减钱的金额
 	 * @param: connection 连接
 	 **/
-	public void sub(String account, int money, Connection connection) {
-		try {
+	public void sub(String account, int money) throws SQLException {
+
+			Connection connection = JdbcUtilsV2.getConnection();
+
 			String sql = "update t_bank set money = money - ? where account = ?;";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setObject(1, money);
@@ -53,8 +56,6 @@ public class BankDao {
 			statement.executeUpdate();
 			statement.close();
 			System.out.println("减钱成功！");
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+
 	}
 }

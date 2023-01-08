@@ -3,6 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/JDBC_transaction/BankDao.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/Main.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/transactionnew/BankDao.java" dialect="MySQL" />
   </component>
   <component name="SqlResolveMappings">
     <file url="file://$PROJECT_DIR$/src/Main.java" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;4478fadb-6d6d-4e2c-8a1b-e64f57bc266b&quot;    },    &quot;group&quot;:{     &quot;@kind&quot;:&quot;schema&quot;,     &quot;node&quot;:{      &quot;name&quot;:{       &quot;@qname&quot;:&quot;study&quot;      }     }    }   }  } }}" />

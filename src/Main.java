@@ -1,29 +1,83 @@
 import org.junit.Test;
+import utils.BaseDao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.List;
 
-public class Main {
+public class Main extends BaseDao {
 
 	@Test
-	public void testBatchInsert() throws Exception {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test?rewriteBatchedStatements=true", "root", "123456");
-		String sql = "insert into t_user(account, password, nickname) values (?, ?, ?)";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		for (int i = 0; i < 10000; i++) {
-			statement.setObject(1, "ddd" + i);
-			statement.setObject(2, "ddd" + i);
-			statement.setObject(3, "驴蛋蛋" + i);
-			statement.addBatch();
-		}
-		statement.executeBatch();
-		statement.close();
-		connection.close();
+	public void testInsert() throws SQLException {
+		String sql = "insert into t_user (account, password, nickname) values(?, ?, ?);";
+		int i = executeUpdate(sql, "测试333", "3333", "ergouzi");
+		System.out.println("i = " + i);
 	}
 
+	@Test
+	public void testDelete() {
+		try {
+			String sql = "delete from t_user where id = ?;";
+			int i = executeUpdate(sql, 3);
+			System.out.println("i = " + i);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testUpdate() {
+		try {
+			String sql = "update t_user set password = ? where nickname = ?";
+			int i = executeUpdate(sql, "123456", "ergouzi");
+			System.out.println("i = " + i);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testQuery() {
+		String sql = "select * from t_user;";
+		try {
+			List<Info> infos = executeQuery(Info.class, sql);
+			for (Info info : infos) {
+				System.out.println(info.getId() + "--" + info.getAccount() + "--" + info.getPassword() + "--" + info.getNickname());
+			}
+		} catch (SQLException | NoSuchFieldException | NoSuchMethodException | InvocationTargetException |
+				 InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
 }
+
+
+//import org.junit.Test;
+//
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
+//
+//public class Main {
+//
+//	@Test
+//	public void testBatchInsert() throws Exception {
+//		Class.forName("com.mysql.cj.jdbc.Driver");
+//		Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.211.128:3306/test?rewriteBatchedStatements=true", "root", "123456");
+//		String sql = "insert into t_user(account, password, nickname) values (?, ?, ?)";
+//		PreparedStatement statement = connection.prepareStatement(sql);
+//		for (int i = 0; i < 10000; i++) {
+//			statement.setObject(1, "ddd" + i);
+//			statement.setObject(2, "ddd" + i);
+//			statement.setObject(3, "驴蛋蛋" + i);
+//			statement.addBatch();
+//		}
+//		statement.executeBatch();
+//		statement.close();
+//		connection.close();
+//	}
+//
+//}
 
 
 //import org.junit.Test;
